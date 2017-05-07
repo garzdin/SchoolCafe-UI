@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import config from './config';
 
 class Header extends Component {
   render() {
     return (
       <header className="main-header">
         <a href="index2.html" className="logo">
-          <span className="logo-mini"><b>A</b>LT</span>
-          <span className="logo-lg"><b>Admin</b>LTE</span>
+          <span className="logo-mini"><b>{config.shortTitlePartOne}</b>{config.shortTitlePartTwo}</span>
+          <span className="logo-lg"><b>{config.longTitlePartOne}</b>{config.longTitlePartTwo}</span>
         </a>
         <nav className="navbar navbar-static-top">
           <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
