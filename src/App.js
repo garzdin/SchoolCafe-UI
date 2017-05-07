@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './less/less/AdminLTE.less';
-import './less/less/skins/skin-blue.less';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Content from './Content';
+import Footer from './Footer';
 
 class App extends Component {
   render() {
     return (
-      <div className="wrapper">
+      <div>
+        <Header />
+        <Sidebar />
+        <Content />
+        <Footer />
       </div>
     );
   }
