@@ -15,6 +15,9 @@ class Header extends Component {
           </a>
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
+              <li>
+                <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}}>Check in</button>
+              </li>
               <li className="dropdown user user-menu">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                   <img src="dist/img/user2-160x160.jpg" className="user-image" alt="User" />
