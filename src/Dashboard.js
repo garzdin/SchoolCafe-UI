@@ -4,16 +4,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="content-wrapper">
-        <section className="content-header">
-          <h1>
-            Dashboard
-            <small>Overview</small>
-          </h1>
-          <ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
-            <li className="active">Dashboard</li>
-          </ol>
-        </section>
         <section className="content">
           <div className="row">
             <div className="col-lg-3 col-xs-6">
