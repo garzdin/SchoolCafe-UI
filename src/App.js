@@ -6,7 +6,8 @@ import {
 import Layout from './Layout';
 import Dashboard from './Dashboard';
 import Login from './Login';
-import Profile from './Account';
+import Profile from './Profile';
+import Homework from './Homework';
 
 const HomeComponent = () => {
   return <Layout component={<Dashboard />} />
@@ -14,6 +15,10 @@ const HomeComponent = () => {
 
 const ProfileComponent = () => {
   return <Layout component={<Profile />} />
+}
+
+const HomeworkComponent = () => {
+  return <Layout component={<Homework />} />
 }
 
 class App extends Component {
@@ -24,6 +29,7 @@ class App extends Component {
           <Route exact path="/" component={HomeComponent}/>
           <Route path="/login" component={Login}/>
           <Route path="/profile" component={ProfileComponent}/>
+          <Route path="/homework" component={HomeworkComponent}/>
         </div>
       </Router>
     );
