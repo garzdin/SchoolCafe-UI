@@ -29,6 +29,15 @@ class App extends Component {
     if (this.state.authed && !this.state.user) {
       this.fetchUser();
     }
+    if (this.state.authed && this.state.user) {
+      this.setUserStatus(true);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.state.authed && this.state.user) {
+      this.setUserStatus(false);
+    }
   }
 
   async check() {
@@ -43,6 +52,16 @@ class App extends Component {
 
   async fetchUser() {
     await fetch(config.apiBaseURL + '/user', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState({ user: responseJson.user });
+    });
+  }
+
+  async setUserStatus(status) {
+    fetch(config.apiBaseURL + '/user/status?online=' + status, {
       credentials: 'include'
     })
     .then(response => response.json())

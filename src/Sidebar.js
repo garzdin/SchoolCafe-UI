@@ -23,8 +23,14 @@ class Sidebar extends Component {
               <img src={this.state.user && this.state.user.photo} className="img-circle" alt="User" />
             </div>
             <div className="pull-left info">
-              <p>{this.state.user &&this.state.user.displayName}</p>
-              <a href="#"><i className="fa fa-circle text-success"></i> Online</a>
+              <p>{this.state.user && this.state.user.displayName}</p>
+              <a href="#">
+                {
+                  this.state.user && this.state.user.online ? (
+                    <i className="fa fa-circle text-success"></i>
+                  ) : (
+                    <i className="fa fa-circle text-danger"></i>
+                  )} {this.state.user && this.state.user.online ? 'Online' : 'Offline'}</a>
             </div>
           </div>
           <ul className="sidebar-menu">
