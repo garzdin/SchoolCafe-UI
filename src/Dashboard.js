@@ -28,7 +28,7 @@ class Dashboard extends Component {
       <div className="content-wrapper">
         <section className="content">
           <div className="row">
-            <div className="col-lg-3 col-xs-6">
+            <div className="col-lg-12 col-xs-12">
               <div className="small-box bg-yellow">
                 <div className="inner">
                   <h3>{this.state.count}</h3>
@@ -44,7 +44,7 @@ class Dashboard extends Component {
             <section className="col-lg-12">
               <div className="nav-tabs-custom">
                 <ul className="nav nav-tabs pull-right">
-                  <li className="pull-left header"><i className="fa fa-inbox"></i> Sales</li>
+                  <li className="pull-left header"><i className="fa fa-area-chart"></i> User Activity</li>
                 </ul>
                 <div className="tab-content no-padding">
                   <div className="chart tab-pane active" id="revenue-chart" style={{position: 'relative', height: 300}}></div>
