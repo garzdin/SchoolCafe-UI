@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import config from './config';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.state.user) {
+      this.setState({ user: nextProps.user });
+    }
+  }
+
   render() {
     return (
       <header className="main-header">
@@ -20,15 +33,15 @@ class Header extends Component {
               </li>
               <li className="dropdown user user-menu">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" className="user-image" alt="User" />
-                  <span className="hidden-xs">Alexander Pierce</span>
+                  <img src={this.state.user && this.state.user.photo} className="user-image" alt={this.state.user &&this.state.user.displayName} />
+                  <span className="hidden-xs">{this.state.user &&this.state.user.displayName}</span>
                 </a>
                 <ul className="dropdown-menu">
                   <li className="user-header">
-                    <img src="dist/img/user2-160x160.jpg" className="img-circle" alt="User" />
+                    <img src={this.state.user &&this.state.user.photo} className="img-circle" alt={this.state.user &&this.state.user.displayName} />
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      {this.state.user &&this.state.user.displayName}
+                      <small>{this.state.user &&this.state.user.email}</small>
                     </p>
                   </li>
                   <li className="user-footer">

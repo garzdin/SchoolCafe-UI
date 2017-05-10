@@ -14,12 +14,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authed: false
+      authed: false,
+      user: null
     }
+    this.check = this.check.bind(this);
+    this.fetchUser = this.fetchUser.bind(this);
   }
 
   componentWillMount() {
-    fetch(config.apiBaseURL + '/auth/check', {
+    this.check();
+  }
+
+  componentDidUpdate() {
+    if (this.state.authed && !this.state.user) {
+      this.fetchUser();
+    }
+  }
+
+  async check() {
+    await fetch(config.apiBaseURL + '/auth/check', {
       credentials: 'include'
     })
     .then(response => response.json())
@@ -28,13 +41,23 @@ class App extends Component {
     });
   }
 
+  async fetchUser() {
+    await fetch(config.apiBaseURL + '/user', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState({ user: responseJson.user });
+    });
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Route exact path="/" render={(props) => <Layout {...props} component={<Dashboard />} authed={this.state.authed} />} />
-          <Route path="/profile" render={(props) => <Layout {...props} component={<Profile />} authed={this.state.authed} />} />
-          <Route path="/homework" render={(props) => <Layout {...props} component={<Homework />} authed={this.state.authed} />} />
+          <Route exact path="/" render={(props) => <Layout {...props} component={<Dashboard />} authed={this.state.authed} user={this.state.user} />} />
+          <Route path="/profile" render={(props) => <Layout {...props} component={<Profile />} authed={this.state.authed} user={this.state.user} />} />
+          <Route path="/homework" render={(props) => <Layout {...props} component={<Homework />} authed={this.state.authed} user={this.state.user} />} />
           <Route path="/login" component={Login} />
         </div>
       </Router>
