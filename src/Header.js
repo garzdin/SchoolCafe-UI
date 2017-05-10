@@ -33,15 +33,15 @@ class Header extends Component {
               </li>
               <li className="dropdown user user-menu">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                  <img src={this.state.user && this.state.user.photo} className="user-image" alt={this.state.user &&this.state.user.displayName} />
-                  <span className="hidden-xs">{this.state.user &&this.state.user.displayName}</span>
+                  <img src={this.state.user && this.state.user.photo} className="user-image" alt={this.state.user && this.state.user.displayName} />
+                  <span className="hidden-xs">{this.state.user && this.state.user.displayName}</span>
                 </a>
                 <ul className="dropdown-menu">
                   <li className="user-header">
-                    <img src={this.state.user &&this.state.user.photo} className="img-circle" alt={this.state.user &&this.state.user.displayName} />
+                    <img src={this.state.user && this.state.user.photo} className="img-circle" alt={this.state.user && this.state.user.displayName} />
                     <p>
-                      {this.state.user &&this.state.user.displayName}
-                      <small>{this.state.user &&this.state.user.email}</small>
+                      {this.state.user && this.state.user.displayName}
+                      <small>{this.state.user && this.state.user.email}</small>
                     </p>
                   </li>
                   <li className="user-footer">
