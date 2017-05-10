@@ -1,6 +1,28 @@
 import React, { Component } from 'react';
+import config from './config';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+
+  componentWillMount() {
+    this.getOnlineCount();
+  }
+
+  async getOnlineCount() {
+    await fetch(config.apiBaseURL + '/users/online', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState({ count: responseJson.count });
+    });
+  }
+
   render() {
     return (
       <div className="content-wrapper">
@@ -9,7 +31,7 @@ class Dashboard extends Component {
             <div className="col-lg-3 col-xs-6">
               <div className="small-box bg-yellow">
                 <div className="inner">
-                  <h3>44</h3>
+                  <h3>{this.state.count}</h3>
                   <p>Users Online</p>
                 </div>
                 <div className="icon">
