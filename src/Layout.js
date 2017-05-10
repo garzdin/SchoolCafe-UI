@@ -12,6 +12,12 @@ class Layout extends Component {
     document.body.classList.remove('skin-blue', 'sidebar-mini');
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.authed) {
+      nextProps.history.replace('/login');
+    }
+  }
+
   render() {
     return (
       <div className="wrapper">
