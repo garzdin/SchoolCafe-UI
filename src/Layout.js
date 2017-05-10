@@ -32,7 +32,7 @@ class Layout extends Component {
     return (
       <div className="wrapper">
         <Header user={this.state.user} />
-        <Sidebar />
+        <Sidebar user={this.state.user} />
         {this.props.component}
         <Footer />
       </div>
