@@ -78,7 +78,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => <Layout {...props} component={<Dashboard />} authed={this.state.authed} user={this.state.user} />} />
           <Route path="/profile" render={(props) => <Layout {...props} component={<Profile />} authed={this.state.authed} user={this.state.user} />} />
           <Route path="/homework" render={(props) => <Layout {...props} component={<Homework />} authed={this.state.authed} user={this.state.user} />} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" render={(props) => <Login {...props} authed={this.state.authed} />} />
         </div>
       </Router>
     );

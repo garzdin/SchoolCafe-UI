@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import config from './config';
 
 class Login extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authed) {
+      nextProps.history.replace('/');
+    }
+  }
+
   componentWillMount() {
     document.body.classList.add('login-page');
   }
