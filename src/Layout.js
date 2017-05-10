@@ -3,7 +3,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 
-class App extends Component {
+class Layout extends Component {
   componentWillMount() {
     document.body.classList.add('skin-blue', 'sidebar-mini');
   }
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Layout;
