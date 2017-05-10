@@ -20,7 +20,7 @@ class Login extends Component {
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
           <div className="social-auth-links text-center">
-            <a href="#" className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google-plus"></i> Sign in using Google+</a>
+            <a href={`${config.apiBaseURL}/auth/google`} className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google-plus"></i> Sign in using Google+</a>
           </div>
         </div>
       </div>

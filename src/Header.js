@@ -36,7 +36,7 @@ class Header extends Component {
                       <a href="#" className="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div className="pull-right">
-                      <a href="#" className="btn btn-default btn-flat">Sign out</a>
+                      <a href={`${config.apiBaseURL}/auth/logout`} className="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
