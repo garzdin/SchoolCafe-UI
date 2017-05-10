@@ -19,6 +19,7 @@ class App extends Component {
     }
     this.check = this.check.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
+    this.setUserStatus = this.setUserStatus.bind(this);
   }
 
   componentWillMount() {
