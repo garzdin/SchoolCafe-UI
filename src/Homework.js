@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Homework extends Component {
   render() {
     return (
-      <section className="content">
+      <div>
         <div className="row">
           <div className="col-lg-12 col-xs-12">
             <div className="box">
@@ -17,29 +17,49 @@ class Homework extends Component {
                       <th>Task</th>
                       <th className="pull-right">Subject</th>
                     </tr>
-                    <tr>
-                      <td>2x^2 + 4x + 5 = 0</td>
-                      <td><span className="badge bg-red pull-right">Math</span></td>
-                    </tr>
-                    <tr>
-                      <td>Clean database</td>
-                      <td><span className="badge bg-yellow pull-right">Biology</span></td>
-                    </tr>
-                    <tr>
-                      <td>Cron job running</td>
-                      <td><span className="badge bg-light-blue pull-right">Psychics</span></td>
-                    </tr>
-                    <tr>
-                      <td>Fix and squish bugs</td>
-                      <td><span className="badge bg-green pull-right">Chemistry</span></td>
-                    </tr>
+                    {
+                      this.props.homework.map((row, i) => {
+                        return (
+                          <tr>
+                            <td>{row.task}</td>
+                            <td><span className="badge pull-right">{row.subject}</span></td>
+                          </tr>
+                        )
+                      })
+                    }
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
-      </section>
+        {this.props.teacher &&
+          <div className="row">
+            <div className="col-lg-12 col-xs-12">
+              <div className="box box-primary">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Add Homework</h3>
+                </div>
+                <form role="form">
+                  <div className="box-body">
+                    <div className="form-group">
+                      <label htmlFor="task">Task</label>
+                      <input type="text" className="form-control" id="task" placeholder="Enter task description" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="subject">Subject</label>
+                      <input type="text" className="form-control" id="subject" placeholder="Enter subject" />
+                    </div>
+                  </div>
+                  <div className="box-footer">
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
     );
   }
 }

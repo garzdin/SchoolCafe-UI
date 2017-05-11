@@ -4,7 +4,7 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tool
 class Admin extends Component {
   render() {
     return (
-      <section className="content">
+      <div>
         <div className="row">
           <div className="col-lg-12 col-xs-12">
             <div className="small-box bg-yellow">
@@ -40,7 +40,7 @@ class Admin extends Component {
             </div>
           </section>
         </div>
-      </section>
+      </div>
     );
   }
 }
