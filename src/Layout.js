@@ -29,11 +29,12 @@ class Layout extends Component {
   }
 
   render() {
+    let Content = this.props.component;
     return (
       <div className="wrapper">
         <Header user={this.state.user} />
         <Sidebar user={this.state.user} />
-        {this.props.component}
+        <Content user={this.state.user} />
         <Footer />
       </div>
     );

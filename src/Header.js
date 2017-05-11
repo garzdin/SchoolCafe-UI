@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Link
+} from 'react-router-dom';
 import config from './config';
 
 class Header extends Component {
@@ -54,10 +57,10 @@ class Header extends Component {
   render() {
     return (
       <header className="main-header">
-        <a href="index2.html" className="logo">
+        <Link to="/" className="logo">
           <span className="logo-mini"><b>{config.shortTitlePartOne}</b>{config.shortTitlePartTwo}</span>
           <span className="logo-lg"><b>{config.longTitlePartOne}</b>{config.longTitlePartTwo}</span>
-        </a>
+        </Link>
         <nav className="navbar navbar-static-top">
           <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span className="sr-only">Toggle navigation</span>
@@ -88,7 +91,7 @@ class Header extends Component {
                   </li>
                   <li className="user-footer">
                     <div className="pull-left">
-                      <a href="#" className="btn btn-default btn-flat">Profile</a>
+                      <Link className="btn btn-default btn-flat" to="/profile">Profile</Link>
                     </div>
                     <div className="pull-right">
                       <a href={`${config.apiBaseURL}/auth/logout`} className="btn btn-default btn-flat">Sign out</a>

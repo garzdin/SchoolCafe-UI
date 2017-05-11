@@ -38,19 +38,10 @@ class Sidebar extends Component {
           </div>
           <ul className="sidebar-menu">
             <li className="header">MAIN NAVIGATION</li>
-            <li className={window.location.pathname === '/' ? 'active' : ''}>
+            <li className="active">
               <Link to="/">
                 <i className="fa fa-bars"></i>
                 <span>Dashboard</span>
-              </Link>
-            </li>
-            <li className={window.location.pathname === '/homework' ? 'active' : ''}>
-              <Link to="/homework">
-                <i className="fa fa-files-o"></i>
-                <span>Homework</span>
-                <span className="pull-right-container">
-                  <span className="label label-primary pull-right">4</span>
-                </span>
               </Link>
             </li>
           </ul>

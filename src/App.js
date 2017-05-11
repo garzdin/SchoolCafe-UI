@@ -7,7 +7,6 @@ import Layout from './Layout';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import Profile from './Profile';
-import Homework from './Homework';
 import config from './config';
 
 class App extends Component {
@@ -55,9 +54,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" render={(props) => <Layout {...props} component={<Dashboard />} authed={this.state.authed} user={this.state.user} />} />
-          <Route path="/profile" render={(props) => <Layout {...props} component={<Profile />} authed={this.state.authed} user={this.state.user} />} />
-          <Route path="/homework" render={(props) => <Layout {...props} component={<Homework />} authed={this.state.authed} user={this.state.user} />} />
+          <Route exact path="/" render={(props) => <Layout {...props} component={Dashboard} authed={this.state.authed} user={this.state.user} />} />
+          <Route path="/profile" render={(props) => <Layout {...props} component={Profile} authed={this.state.authed} user={this.state.user} />} />
           <Route path="/login" render={(props) => <Login {...props} authed={this.state.authed} />} />
         </div>
       </Router>
