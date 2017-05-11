@@ -65,7 +65,7 @@ class Header extends Component {
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
               <li>
-                {this.state.checkInId ? (
+                {this.state.user && !this.state.user.teacher && this.state.checkInId ? (
                   <button type="button" className="btn btn-danger" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check out</button>
                 ) : (
                   <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check in</button>
