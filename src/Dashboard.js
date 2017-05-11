@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import config from './config';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      times: []
     }
+    this.getOnlineCount = this.getOnlineCount.bind(this);
+    this.setTimes = this.setTimes.bind(this);
+    this.getTimes = this.getTimes.bind(this);
   }
 
   componentWillMount() {
     this.getOnlineCount();
+    this.getTimes();
   }
 
   async getOnlineCount() {
@@ -20,6 +26,28 @@ class Dashboard extends Component {
     .then(response => response.json())
     .then(responseJson => {
       this.setState({ count: responseJson.count });
+    });
+  }
+
+  async setTimes(times) {
+    this.setState({ times: times });
+  }
+
+  async getTimes() {
+    await fetch(config.apiBaseURL + '/time', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        var times = []
+        responseJson.times.forEach((time) => {
+          var timeSpentMs = Date.parse(time.end) - Date.parse(time.start);
+          var timeSpent = new Date(1000 * Math.round(timeSpentMs / 1000));
+          times.push({hours: timeSpent.getUTCHours(), minutes: timeSpent.getUTCMinutes(), seconds: timeSpent.getUTCSeconds()});
+        });
+        this.setTimes(times);
+      }
     });
   }
 
@@ -47,7 +75,17 @@ class Dashboard extends Component {
                   <li className="pull-left header"><i className="fa fa-area-chart"></i> User Activity</li>
                 </ul>
                 <div className="tab-content no-padding">
-                  <div className="chart tab-pane active" id="revenue-chart" style={{position: 'relative', height: 300}}></div>
+                  <ResponsiveContainer height={300} width='100%'>
+                    {this.state.times &&
+                      <AreaChart data={this.state.times} margin={{top: 30, right: 50, left: 0, bottom: 20}}>
+                        <XAxis/>
+                        <YAxis/>
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <Tooltip/>
+                        <Area type='monotone' dataKey='seconds' stroke='#8884d8' fill='#8884d8' />
+                      </AreaChart>
+                    }
+                  </ResponsiveContainer>
                 </div>
               </div>
             </section>
