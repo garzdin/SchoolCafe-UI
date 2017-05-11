@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -30,19 +31,27 @@ class Sidebar extends Component {
                     <i className="fa fa-circle text-success"></i>
                   ) : (
                     <i className="fa fa-circle text-danger"></i>
-                  )} {this.state.user && this.state.user.online ? 'Online' : 'Offline'}</a>
+                  )
+                } {this.state.user && this.state.user.online ? 'Online' : 'Offline'}
+              </a>
             </div>
           </div>
           <ul className="sidebar-menu">
             <li className="header">MAIN NAVIGATION</li>
-            <li className="active">
-              <a href="#">
+            <li className={window.location.pathname === '/' ? 'active' : ''}>
+              <Link to="/">
+                <i className="fa fa-bars"></i>
+                <span>Dashboard</span>
+              </Link>
+            </li>
+            <li className={window.location.pathname === '/homework' ? 'active' : ''}>
+              <Link to="/homework">
                 <i className="fa fa-files-o"></i>
                 <span>Homework</span>
                 <span className="pull-right-container">
                   <span className="label label-primary pull-right">4</span>
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
