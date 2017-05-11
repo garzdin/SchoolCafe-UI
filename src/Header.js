@@ -64,13 +64,15 @@ class Header extends Component {
           </a>
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
-              <li>
-                {this.state.user && !this.state.user.teacher && this.state.checkInId ? (
-                  <button type="button" className="btn btn-danger" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check out</button>
-                ) : (
-                  <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check in</button>
-                )}
-              </li>
+              {this.state.user && !this.state.user.teacher &&
+                <li>
+                  {this.state.user && this.state.checkInId ? (
+                    <button type="button" className="btn btn-danger" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check out</button>
+                  ) : (
+                    <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check in</button>
+                  )}
+                </li>
+              }
               <li className="dropdown user user-menu">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                   <img src={this.state.user && this.state.user.photo} className="user-image" alt={this.state.user && this.state.user.displayName} />
