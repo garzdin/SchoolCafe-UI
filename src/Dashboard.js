@@ -53,7 +53,6 @@ class Dashboard extends Component {
     .then(response => response.json())
     .then(responseJson => {
       if (!('error' in responseJson)) {
-        console.log(responseJson)
         this.setState({ count: responseJson.count });
       }
     });
@@ -92,7 +91,7 @@ class Dashboard extends Component {
                             <YAxis/>
                             <CartesianGrid strokeDasharray="3 3"/>
                             <Tooltip/>
-                            <Area type='monotone' dataKey='seconds' stroke='#8884d8' fill='#8884d8' />
+                            <Area type='monotone' dataKey='minutes' stroke='#8884d8' fill='#8884d8' />
                           </AreaChart>
                         }
                       </ResponsiveContainer>
