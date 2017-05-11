@@ -9,15 +9,21 @@ class Dashboard extends Component {
     this.state = {
       user: null,
       count: 0,
-      times: []
+      times: [],
+      homework: []
     }
     this.setTimes = this.setTimes.bind(this);
     this.getStudentCount = this.getStudentCount.bind(this);
+    this.getHomework = this.getHomework.bind(this);
+    this.onAddHomework = this.onAddHomework.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== this.state.user) {
       this.setState({ user: nextProps.user });
+    }
+    if(nextProps.user) {
+      this.getHomework();
     }
     if (nextProps.user && nextProps.user.teacher) {
       this.getTimes();
@@ -59,14 +65,51 @@ class Dashboard extends Component {
     });
   }
 
+  async getHomework() {
+    await fetch(config.apiBaseURL + '/homework', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        this.setState({ homework: responseJson.homework });
+      }
+    });
+  }
+
+  async onAddHomework(homework) {
+    await fetch(config.apiBaseURL + '/homework', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(homework)
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        this.setState({ homework: this.state.homework.push(responseJson.homework) });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="content-wrapper">
         {
           this.state.user && this.state.user.teacher ? (
-            <Admin count={this.state.count} times={this.state.times} />
+            <section className="content">
+              <Admin count={this.state.count} times={this.state.times} />
+              <Homework
+                teacher={this.state.user && this.state.user.teacher}
+                homework={this.state.homework}
+                onAdd={this.onAddHomework} />
+            </section>
           ) : (
-            <Homework />
+            <section className="content">
+              <Homework
+                teacher={this.state.user && this.state.user.teacher}
+                homework={this.state.homework}
+                onAdd={this.onAddHomework} />
+            </section>
           )
         }
       </div>
