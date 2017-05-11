@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 
 class Homework extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    var homework = {
+      task: this.taskInput.value,
+      subject: this.subjectInput.value
+    };
+    this.props.onAdd(homework);
+  }
+
   render() {
     return (
       <div>
@@ -18,9 +32,9 @@ class Homework extends Component {
                       <th className="pull-right">Subject</th>
                     </tr>
                     {
-                      this.props.homework.map((row, i) => {
+                      this.props.homework.length > 0 && this.props.homework.map((row, i) => {
                         return (
-                          <tr>
+                          <tr key={i}>
                             <td>{row.task}</td>
                             <td><span className="badge pull-right">{row.subject}</span></td>
                           </tr>
@@ -40,15 +54,25 @@ class Homework extends Component {
                 <div className="box-header with-border">
                   <h3 className="box-title">Add Homework</h3>
                 </div>
-                <form role="form">
+                <form role="form" onSubmit={this.handleSubmit}>
                   <div className="box-body">
                     <div className="form-group">
                       <label htmlFor="task">Task</label>
-                      <input type="text" className="form-control" id="task" placeholder="Enter task description" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="task"
+                        placeholder="Enter task description"
+                        ref={(ref) => this.taskInput = ref} />
                     </div>
                     <div className="form-group">
                       <label htmlFor="subject">Subject</label>
-                      <input type="text" className="form-control" id="subject" placeholder="Enter subject" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="subject"
+                        placeholder="Enter subject"
+                        ref={(ref) => this.subjectInput = ref} />
                     </div>
                   </div>
                   <div className="box-footer">

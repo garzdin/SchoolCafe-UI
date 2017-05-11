@@ -78,15 +78,15 @@ class Dashboard extends Component {
   }
 
   async onAddHomework(homework) {
-    await fetch(config.apiBaseURL + '/homework', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(homework)
+    await fetch(config.apiBaseURL + '/homework/add?task=' + encodeURIComponent(homework.task) + '&subject=' + encodeURIComponent(homework.subject), {
+      credentials: 'include'
     })
     .then(response => response.json())
     .then(responseJson => {
       if (!('error' in responseJson)) {
-        this.setState({ homework: this.state.homework.push(responseJson.homework) });
+        var homework = this.state.homework;
+        homework.push(responseJson.homework);
+        this.setState({ homework: homework });
       }
     });
   }
