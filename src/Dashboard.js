@@ -16,6 +16,7 @@ class Dashboard extends Component {
     this.getStudentCount = this.getStudentCount.bind(this);
     this.getHomework = this.getHomework.bind(this);
     this.onAddHomework = this.onAddHomework.bind(this);
+    this.onDeleteHomework = this.onDeleteHomework.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -91,6 +92,21 @@ class Dashboard extends Component {
     });
   }
 
+  async onDeleteHomework(index) {
+    let entry = this.state.homework[index];
+    await fetch(config.apiBaseURL + '/homework/remove?id=' + entry._id, {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        var homework = this.state.homework;
+        homework.splice(index, 1);
+        this.setState({ homework: homework });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="content-wrapper">
@@ -101,14 +117,14 @@ class Dashboard extends Component {
               <Homework
                 teacher={this.state.user && this.state.user.teacher}
                 homework={this.state.homework}
-                onAdd={this.onAddHomework} />
+                onAdd={this.onAddHomework}
+                onDelete={this.onDeleteHomework} />
             </section>
           ) : (
             <section className="content">
               <Homework
                 teacher={this.state.user && this.state.user.teacher}
-                homework={this.state.homework}
-                onAdd={this.onAddHomework} />
+                homework={this.state.homework} />
             </section>
           )
         }

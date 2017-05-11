@@ -29,7 +29,10 @@ class Homework extends Component {
                   <tbody>
                     <tr>
                       <th>Task</th>
-                      <th className="pull-right">Subject</th>
+                      <th>Subject</th>
+                      {this.props.teacher &&
+                        <th className="pull-right">Delete</th>
+                      }
                     </tr>
                     {
                       this.props.homework.length > 0 && this.props.homework.map((row, i) => {
@@ -37,6 +40,9 @@ class Homework extends Component {
                           <tr key={i}>
                             <td>{row.task}</td>
                             <td><span className="badge pull-right">{row.subject}</span></td>
+                            {this.props.teacher &&
+                              <td className="pull-right" onClick={(e) => this.props.onDelete(i)}><i className="fa fa-times"></i></td>
+                            }
                           </tr>
                         )
                       })
