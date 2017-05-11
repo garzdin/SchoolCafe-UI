@@ -19,7 +19,6 @@ class App extends Component {
     }
     this.check = this.check.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
-    this.setUserStatus = this.setUserStatus.bind(this);
   }
 
   componentWillMount() {
@@ -29,15 +28,6 @@ class App extends Component {
   componentDidUpdate() {
     if (this.state.authed && !this.state.user) {
       this.fetchUser();
-    }
-    if (this.state.authed && this.state.user) {
-      this.setUserStatus(true);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.state.authed && this.state.user) {
-      this.setUserStatus(false);
     }
   }
 
@@ -53,16 +43,6 @@ class App extends Component {
 
   async fetchUser() {
     await fetch(config.apiBaseURL + '/user', {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(responseJson => {
-      this.setState({ user: responseJson.user });
-    });
-  }
-
-  async setUserStatus(status) {
-    fetch(config.apiBaseURL + '/user/status?online=' + status, {
       credentials: 'include'
     })
     .then(response => response.json())

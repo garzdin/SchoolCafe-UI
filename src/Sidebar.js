@@ -27,12 +27,12 @@ class Sidebar extends Component {
               <p>{this.state.user && this.state.user.displayName}</p>
               <a href="#">
                 {
-                  this.state.user && this.state.user.online ? (
-                    <i className="fa fa-circle text-success"></i>
+                  this.state.user && this.state.user.teacher ? (
+                    'Teacher'
                   ) : (
-                    <i className="fa fa-circle text-danger"></i>
+                    'Student'
                   )
-                } {this.state.user && this.state.user.online ? 'Online' : 'Offline'}
+                }
               </a>
             </div>
           </div>
