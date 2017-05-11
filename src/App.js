@@ -30,13 +30,13 @@ class App extends Component {
     if (this.state.authed && !this.state.user) {
       this.fetchUser();
     }
-    if (this.state.authed && this.state.user) {
+    if (this.state.authed && this.state.user && !this.state.user.teacher) {
       this.setUserStatus(true);
     }
   }
 
   componentWillUnmount() {
-    if (this.state.authed && this.state.user) {
+    if (this.state.authed && this.state.user && !this.state.user.teacher) {
       this.setUserStatus(false);
     }
   }
