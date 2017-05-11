@@ -5,8 +5,44 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      checkInId: null
     }
+    this.toggleCheck = this.toggleCheck.bind(this);
+    this.checkIn = this.checkIn.bind(this);
+    this.checkOut = this.checkOut.bind(this);
+  }
+
+  toggleCheck(event) {
+    if (this.state.checkInId) {
+      this.checkOut();
+    } else {
+      this.checkIn();
+    }
+  }
+
+  async checkIn() {
+    await fetch(config.apiBaseURL + '/user/check/in', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        this.setState({ checkInId: responseJson.time._id });
+      }
+    });
+  }
+
+  async checkOut() {
+    await fetch(config.apiBaseURL + '/user/check/out?id=' + this.state.checkInId, {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      if (!('error' in responseJson)) {
+        this.setState({ checkInId: null });
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,7 +65,11 @@ class Header extends Component {
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
               <li>
-                <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}}>Check in</button>
+                {this.state.checkInId ? (
+                  <button type="button" className="btn btn-danger" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check out</button>
+                ) : (
+                  <button type="button" className="btn btn-success" style={{marginTop: 7, marginRight: 12}} onClick={this.toggleCheck}>Check in</button>
+                )}
               </li>
               <li className="dropdown user user-menu">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
