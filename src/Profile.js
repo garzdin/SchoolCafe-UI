@@ -1,45 +1,33 @@
 import React, { Component } from 'react';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.state.user) {
+      this.setState({ user: nextProps.user });
+    }
+  }
+
   render() {
     return (
       <div className="content-wrapper">
         <section className="content-header">
-          <h1>
-            Dashboard
-            <small>Overview</small>
-          </h1>
-          <ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
-            <li className="active">Dashboard</li>
-          </ol>
-        </section>
-        <section className="content">
           <div className="row">
-            <div className="col-lg-3 col-xs-6">
-              <div className="small-box bg-yellow">
-                <div className="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
+            <div className="col-xs-12">
+              <div className="box box-primary">
+                <div className="box-body box-profile">
+                  <img className="profile-user-img img-responsive img-circle" src="/dist/img/face.png" alt={this.state.user && this.state.user.displayName} />
+                  <h3 className="profile-username text-center">{this.state.user && this.state.user.displayName}</h3>
+                  <p className="text-muted text-center">{this.state.user && this.state.user.teacher ? 'Teacher' : 'Student'}</p>
                 </div>
-                <div className="icon">
-                  <i className="ion ion-person-add"></i>
-                </div>
-                <a href="#" className="small-box-footer">More info <i className="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <section className="col-lg-12">
-              <div className="nav-tabs-custom">
-                <ul className="nav nav-tabs pull-right">
-                  <li className="pull-left header"><i className="fa fa-inbox"></i> Sales</li>
-                </ul>
-                <div className="tab-content no-padding">
-                  <div className="chart tab-pane active" id="revenue-chart" style={{position: 'relative', height: 300}}></div>
-                </div>
-              </div>
-            </section>
           </div>
         </section>
       </div>
