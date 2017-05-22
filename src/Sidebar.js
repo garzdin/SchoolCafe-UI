@@ -40,7 +40,7 @@ class Sidebar extends Component {
             <li className="header">MAIN NAVIGATION</li>
             <li className="active">
               <Link to="/">
-                <i className="fa fa-bars"></i>
+                <i className="fa fa-object-group"></i>
                 <span>Dashboard</span>
               </Link>
             </li>
